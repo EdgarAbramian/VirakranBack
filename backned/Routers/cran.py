@@ -13,70 +13,103 @@ stockDB = stock.StockDatabase()
 
 @router.get("/stock")
 async def get_brand():
-    return {"message": pd.DataFrame(stockDB.select()).to_json(orient="records")}
+    try:
+        return {"message": pd.DataFrame(stockDB.select()).to_json(orient="records")}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/stock/insert")
 async def insert_stock(data: dict):
-    stockDB.insert(data)
-    return {"message": True}
+    try:
+        stockDB.insert(data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/stock/delete/{id_stock:int}")
 async def del_stock(id_stock: int):
-    stockDB.delete(id_stock)
-    return {"message": True}
+    try:
+        stockDB.delete(id_stock)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/stock/update/{id_stock:int}")
 async def update_stock(data: dict, id_stock: int):
-    stockDB.update(id_stock, data)
-    return {"message": True}
+    try:
+        stockDB.update(id_stock, data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/brand")
 async def get_brand():
-    return {"message": pd.DataFrame(brandDB.select()).to_json(orient="records")}
+    try:
+        return {"message": pd.DataFrame(brandDB.select()).to_json(orient="records")}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/brand/insert")
 async def get_brand(data: dict):
-    brandDB.insert(data)
-    return {"message": True}
+    try:
+        brandDB.insert(data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/brand/delete/{id_brand:int}")
 async def del_brand(id_brand: int):
-    brandDB.delete(id_brand)
-    return {"message": True}
+    try:
+        brandDB.delete(id_brand)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/model/{id_brand:int}")
 async def get_model(id_brand: int):
-    if id_brand:
-        response = modelDB.select(id_brand)
-    else:
-        response = modelDB.select()
-    response = pd.DataFrame(response).to_json(orient="records")
-    return {"message": response}
+    try:
+        if id_brand:
+            response = modelDB.select(id_brand)
+        else:
+            response = modelDB.select()
+        response = pd.DataFrame(response).to_json(orient="records")
+        return {"message": response}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/model/delete/{id_brand:int}")
 async def del_model(id_brand: int):
-    modelDB.delete(id_brand)
-    return {"message": True}
+    try:
+        modelDB.delete(id_brand)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/model/update/{id_brand:int}")
 async def get_model(id_brand: int):
-    modelDB.update(id_brand, {"model": "test123"})
-    return {"message": True}
+    try:
+        modelDB.update(id_brand, {"model": "test123"})
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/model/insert")
 async def get_model(data: dict):
-    modelDB.insert(data)
-    return {"message": True}
+    try:
+        modelDB.insert(data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/")

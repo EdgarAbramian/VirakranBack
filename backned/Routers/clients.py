@@ -13,50 +13,77 @@ rentDB = rent_app.RentDatabase()
 
 @router.get("/clients")
 async def get_clients():
-    return {"message": pd.DataFrame(clients.select()).to_json(orient="records")}
+    try:
+        return {"message": pd.DataFrame(clients.select()).to_json(orient="records")}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/clients/delete/{id}")
 async def delete_clients(id_: int):
-    clientDB.delete(id_)
-    return {"message": True}
+    try:
+        clientDB.delete(id_)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/clients/insert")
 async def insert_clients(data: dict):
-    clientDB.insert(data)
-    return {"message": True}
+    try:
+        clientDB.insert(data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/clients/update/{id}")
 async def update_clients(id_: int, data: dict):
-    clientDB.update(id_, data)
-    return {"message": True}
+    try:
+        clientDB.update(id_, data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/rent/{id}")
 async def get_clients(id_: int):
-    return {"message": pd.DataFrame(rent_app.select(id_)).to_json(orient="records")}
+    try:
+        return {"message": pd.DataFrame(rent_app.select(id_)).to_json(orient="records")}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/rent")
 async def get_clients():
-    return {"message": pd.DataFrame(rent_app.select()).to_json(orient="records")}
+    try:
+        return {"message": pd.DataFrame(rent_app.select()).to_json(orient="records")}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.get("/rent/delete/{id}")
 async def delete_clients(id_: int):
-    rentDB.delete(id_)
-    return {"message": True}
+    try:
+        rentDB.delete(id_)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/rent/insert")
 async def insert_clients(data: dict):
-    rentDB.insert(data)
-    return {"message": True}
+    try:
+        rentDB.insert(data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
 
 
 @router.post("/rent/update/{id}")
 async def update_clients(id_: int, data: dict):
-    rentDB.update(id_, data)
-    return {"message": True}
+    try:
+        rentDB.update(id_, data)
+        return {"message": True}
+    except Exception as e:
+        return {"message": e}
