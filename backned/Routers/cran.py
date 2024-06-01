@@ -16,6 +16,12 @@ async def get_brand():
     return {"message": pd.DataFrame(stockDB.select()).to_json(orient="records")}
 
 
+@router.post("/stock/insert")
+async def insert_stock(data: dict):
+    stockDB.insert(data)
+    return {"message": True}
+
+
 @router.get("/stock/delete/{id_stock:int}")
 async def del_stock(id_stock: int):
     stockDB.delete(id_stock)
@@ -31,6 +37,12 @@ async def update_stock(data: dict, id_stock: int):
 @router.get("/brand")
 async def get_brand():
     return {"message": pd.DataFrame(brandDB.select()).to_json(orient="records")}
+
+
+@router.post("/brand/insert")
+async def get_brand(data: dict):
+    brandDB.insert(data)
+    return {"message": True}
 
 
 @router.get("/brand/delete/{id_brand:int}")
