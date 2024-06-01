@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-from backned.Routers import cran
+from backned.Routers import cran, clients
 
 app = FastAPI(
     title="ViraKran",
@@ -10,6 +10,7 @@ app = FastAPI(
 )
 
 app.include_router(cran.router)
+app.include_router(clients.router)
 
 
 @app.get("/")
