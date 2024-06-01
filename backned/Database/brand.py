@@ -18,8 +18,6 @@ class BranDatabase(Database):
         self.connection.commit()
 
     def delete(self, id_brand: int):
-        modelDB = model.ModelDatabase()
-        modelDB.delete(id_brand)
         self.connection.execute(self.table.delete().where(self.table.c.id == id_brand))
         self.connection.commit()
 

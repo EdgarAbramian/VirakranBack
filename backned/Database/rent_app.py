@@ -4,7 +4,7 @@ from sqlalchemy import select
 from backned.Database import Database
 
 
-class StockDatabase(Database):
+class RentDatabase(Database):
     def __init__(self):
         super().__init__()
         self.table = sqlalchemy.Table("rent_app", self.metadata)
@@ -26,7 +26,7 @@ class StockDatabase(Database):
 
 
 if __name__ == "__main__":
-    d = StockDatabase()
+    d = RentDatabase()
 
     print(d.select())
     d.update(4, {"info": "test123"})
