@@ -1,3 +1,5 @@
+import json
+
 from fastapi import APIRouter
 from backned.Database import model, brand, stock
 import pandas as pd
@@ -14,7 +16,7 @@ stockDB = stock.StockDatabase()
 @router.get("/stock")
 async def get_brand():
     try:
-        return {"message": pd.DataFrame(stockDB.select()).to_json(orient="records")}
+        return {"message": json.loads(pd.DataFrame(stockDB.select()).to_json(orient="records"))}
     except Exception as e:
         return {"message": e}
 
@@ -49,7 +51,7 @@ async def update_stock(data: dict, id_stock: int):
 @router.get("/brand")
 async def get_brand():
     try:
-        return {"message": pd.DataFrame(brandDB.select()).to_json(orient="records")}
+        return {"message": json.loads(pd.DataFrame(brandDB.select()).to_json(orient="records"))}
     except Exception as e:
         return {"message": e}
 
@@ -80,7 +82,7 @@ async def get_model(id_brand: int):
         else:
             response = modelDB.select()
         response = pd.DataFrame(response).to_json(orient="records")
-        return {"message": response}
+        return {"message": json.loads(response)}
     except Exception as e:
         return {"message": e}
 

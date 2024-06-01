@@ -1,3 +1,5 @@
+import json
+
 from fastapi import APIRouter
 from backned.Database import clients, rent_app
 import pandas as pd
@@ -14,7 +16,7 @@ rentDB = rent_app.RentDatabase()
 @router.get("/clients")
 async def get_clients():
     try:
-        return {"message": pd.DataFrame(clients.select()).to_json(orient="records")}
+        return {"message": json.loads(pd.DataFrame(clients.select()).to_json(orient="records"))}
     except Exception as e:
         return {"message": e}
 
@@ -49,7 +51,7 @@ async def update_clients(id_: int, data: dict):
 @router.get("/rent/{id}")
 async def get_clients(id_: int):
     try:
-        return {"message": pd.DataFrame(rent_app.select(id_)).to_json(orient="records")}
+        return {"message": json.loads(pd.DataFrame(rent_app.select(id_)).to_json(orient="records"))}
     except Exception as e:
         return {"message": e}
 
@@ -57,7 +59,7 @@ async def get_clients(id_: int):
 @router.get("/rent")
 async def get_clients():
     try:
-        return {"message": pd.DataFrame(rent_app.select()).to_json(orient="records")}
+        return {"message": json.loads(pd.DataFrame(rent_app.select()).to_json(orient="records"))}
     except Exception as e:
         return {"message": e}
 
