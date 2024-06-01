@@ -48,7 +48,7 @@ async def update_clients(id_: int, data: dict):
         return {"message": e}
 
 
-@router.post("/clients/AddOrGet/")
+@router.post("/AddOrGet/")
 async def add_or_get_clients(data: dict):
     try:
         clientDB.insert(data)
