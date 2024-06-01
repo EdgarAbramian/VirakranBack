@@ -48,6 +48,16 @@ async def update_clients(id_: int, data: dict):
         return {"message": e}
 
 
+@router.post("/clients/AddOrGet/")
+async def add_or_get_clients(data: dict):
+    try:
+        clientDB.insert(data)
+    except Exception as e:
+        pass
+    return json.loads(clientDB.select(data))
+
+
+
 @router.get("/rent/{id}")
 async def get_clients(id_: int):
     try:

@@ -9,7 +9,9 @@ class ClientsDatabase(Database):
         super().__init__()
         self.table = sqlalchemy.Table("clients", self.metadata)
 
-    def select(self):
+    def select(self, data: dict = None):
+        if data:
+            return self.connection.execute(select(self.table).where(**data)).fetchall()
         return self.connection.execute(select(self.table)).fetchall()
 
     def insert(self, data):
